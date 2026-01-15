@@ -1,0 +1,143 @@
+/* Header.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    background: linear-gradient(to right, #1a1a2e, #16213e);
+    border-bottom: 1px solid rgba(184, 147, 95, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-icon {
+    font-size: 2rem;
+}
+
+.logo-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #d4af6a;
+    letter-spacing: 1px;
+    font-family: 'Georgia', serif;
+}
+
+.logo-tagline {
+    font-size: 0.65rem;
+    color: #b8935f;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-link {
+    color: #e8e8e8;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+
+.nav-link:hover {
+    color: #d4af6a;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.cta-button {
+    background: linear-gradient(to right, #b8935f, #8b6f47);
+    color: #ffffff;
+    border: none;
+    padding: 0.85rem 1.8rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.cta-button:hover {
+    background: linear-gradient(to right, #d4af6a, #b8935f);
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .nav {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 840px) {
+    .header-container {
+        flex-wrap: wrap;
+        padding: 1rem 1.5rem;
+    }
+
+    .nav {
+        width: 100%;
+        justify-content: center;
+        gap: 1.5rem;
+        padding-top: 1rem;
+    }
+
+    .logo-tagline {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .logo-text {
+        font-size: 1.3rem;
+    }
+
+    .cta-button {
+        padding: 0.7rem 1.4rem;
+        font-size: 0.85rem;
+    }
+}
