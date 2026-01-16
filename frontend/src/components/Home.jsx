@@ -1,7 +1,19 @@
 function Home(){
     return (
-        <div className="Home">
-            
+        <div className="home">
+            <div className="home-headline">
+                <h1> Simplifying Your Vision With AI </h1>
+            </div>
+            <div className="home-caption">
+                <h2> 
+                    Your life evolves, and your future home should. We make the home process easier, accessible and 
+                    convenient just at your finger tips.
+
+                </h2>
+            </div>
+            <div className="home-btn">
+                <button className="btn"> Explore </button>
+            </div>
         </div>
     )
 }

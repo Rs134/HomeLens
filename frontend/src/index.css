@@ -1,9 +1,12 @@
-/* Header.css */
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body{
+    background: linear-gradient(to right, #1a1a2e, #16213e);
 }
 
 .header {
@@ -81,7 +84,7 @@
     width: 100%;
 }
 
-.cta-button {
+.btn {
     background: linear-gradient(to right, #b8935f, #8b6f47);
     color: #ffffff;
     border: none;
@@ -95,10 +98,55 @@
     text-transform: uppercase;
 }
 
-.cta-button:hover {
+.btn:hover {
     background: linear-gradient(to right, #d4af6a, #b8935f);
 }
 
+
+.home {
+    position: relative;
+    min-height: 75vh;
+    background-image: url("./assets/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    color: white;
+    padding: 4rem;
+  }
+  
+  .home::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55); /* darkness */
+  }
+  
+  /* Make sure text stays above overlay */
+  .home > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .home-headline{
+    font-size: 2rem;
+
+  }
+
+  .home-caption{
+    margin-top: 20px;
+    font-size: 1.1rem;
+    width: 50%;
+    font-style: italic;
+  }
+  
+  .home-btn{
+    margin-top: 20px;
+  }
 
 
 /* Responsive Design */

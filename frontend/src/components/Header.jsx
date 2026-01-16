@@ -16,12 +16,11 @@ function Header() {
                     <a href="#home" className="nav-link">Home</a>
                     <a href="#about" className="nav-link">About</a>
                     <a href="#services" className="nav-link">Services</a>
-                    <a href="#testimonials" className="nav-link">Testimonials</a>
                     <a href="#contact" className="nav-link">Contact</a>
                 </nav>
 
                 <div className="header-actions">
-                    <button className="cta-button">Get Started</button>
+                    <button className="btn">Get Started</button>
                 </div>
             </div>
         </header>
