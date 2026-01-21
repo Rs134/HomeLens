@@ -13,7 +13,7 @@ function About(){
                 <div className="cards-container">
                     <div className="card">
                         <div className="card-icon">
-
+                            <img src="/star.png"/>
                         </div>
                         <div className="card-heading">
                             <h3> AI Driven Filtering </h3>
@@ -28,7 +28,7 @@ function About(){
 
                     <div className="card">
                         <div className="card-icon">
-
+                        <img src="/user.png"/>
                         </div>
                         <div className="card-heading">
                             <h3> AI Driven Filtering </h3>
@@ -43,6 +43,7 @@ function About(){
 
                     <div className="card">
                         <div className="card-icon">
+                            <img src="/pencil.png"/> 
 
                         </div>
                         <div className="card-heading">
