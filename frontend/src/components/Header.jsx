@@ -1,4 +1,4 @@
-// Header.jsx
+import {Link, Outlet} from "react-router"
 import React from 'react';
 
 function Header() {
@@ -23,6 +23,7 @@ function Header() {
                     <button className="btn">Get Started</button>
                 </div>
             </div>
+            <Outlet/>
         </header>
     );
 }

@@ -1,6 +1,6 @@
 function About(){
     return (
-        <div className="about">
+        <section id="about">
             <div className="about-container">
                 <div className="about-headline">
                     <div className="about-left-heading">
@@ -61,7 +61,7 @@ function About(){
                     
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 

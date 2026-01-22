@@ -1,6 +1,6 @@
 function Home(){
     return (
-        <div className="home">
+        <section id="home">
             <div className="home-headline">
                 <h1> Simplifying Your Vision With AI </h1>
             </div>
@@ -14,7 +14,7 @@ function Home(){
             <div className="home-btn">
                 <button className="btn"> Explore </button>
             </div>
-        </div>
+        </section>
     )
 }
 

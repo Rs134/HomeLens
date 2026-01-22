@@ -3,7 +3,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
 }
+
+html {
+    scroll-behavior: smooth;
+  }
+  
 
 body{
     background: linear-gradient(to right, #1a1a2e, #16213e);
@@ -103,7 +109,7 @@ body{
 }
 
 
-.home {
+#home {
     position: relative;
     min-height: 75vh;
     background-image: url("./assets/background.jpg");
@@ -119,7 +125,7 @@ body{
     padding: 4rem;
   }
   
-  .home::before {
+  #home::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -127,7 +133,7 @@ body{
   }
   
   /* Make sure text stays above overlay */
-  .home > * {
+  #home > * {
     position: relative;
     z-index: 1;
   }
@@ -148,10 +154,11 @@ body{
     margin-top: 20px;
   } 
   
-  .about {
+  #about {
     min-height: 75vh;
     padding: 4rem 2rem 4rem;
     background: linear-gradient(to right, #1a1a2e, #16213e);
+
 }
 
 .about-container {
@@ -251,7 +258,7 @@ body{
     opacity: 0.85;
 }
 
-.services {
+#services {
     min-height: 45vh;
     background: linear-gradient(135deg, #b8935f 0%, #8b6f47 100%);
     padding: 6rem 2rem;

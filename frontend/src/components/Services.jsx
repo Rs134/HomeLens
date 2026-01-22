@@ -1,6 +1,6 @@
 function Services (){
     return(
-        <div className="services">
+        <section id="services">
                 <div className="services-headline">
                     <p className="services-note"> We Appreciate Your Trust Greatly </p>
                     <h1 className="services-title"> Transform Your Perspective Now </h1>
@@ -12,7 +12,7 @@ function Services (){
                     <img src="/services-img2.jpg"/>
                     <img src="/services-img3.jpg"/>
                 </div>
-        </div>
+        </section>
     )
 }
 export default Services
