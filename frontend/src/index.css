@@ -158,7 +158,7 @@ body{
     min-height: 75vh;
     padding: 4rem 2rem 4rem;
     background: linear-gradient(to right, #1a1a2e, #16213e);
-
+    scroll-margin-top: 80px;
 }
 
 .about-container {
@@ -267,6 +267,7 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    scroll-margin-top: 50px;
 }
 
 .services-headline {
