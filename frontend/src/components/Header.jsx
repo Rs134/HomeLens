@@ -1,4 +1,4 @@
-import {Link, Outlet} from "react-router"
+import {Outlet} from "react-router"
 import React from 'react';
 
 function Header() {
@@ -16,7 +16,6 @@ function Header() {
                     <a href="#home" className="nav-link">Home</a>
                     <a href="#about" className="nav-link">About</a>
                     <a href="#services" className="nav-link">Services</a>
-                    <a href="#contact" className="nav-link">Contact</a>
                 </nav>
 
                 <div className="header-actions">
