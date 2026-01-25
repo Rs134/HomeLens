@@ -9,7 +9,7 @@ function Listings() {
     const fetchHomes = async () => {
       try {
         const response = await fetch(
-          "https://data.cityofnewyork.us/resource/usep-8jbt.json?borough=4&$limit=10"
+          "https://data.cityofnewyork.us/resource/usep-8jbt.json?borough=4&$limit=100"
         );
 
         if (!response.ok) throw new Error("Failed to fetch housing data");
@@ -58,19 +58,21 @@ function Listings() {
         <p>No homes found.</p>
       ) : (
         <div>
-          <p>Found {homes.length} homes</p>
-          {homes.map(home => (
-            <div key={home.id} className="home-card">
-              <h3>{home.address}</h3>
-              <p>{home.building_class}</p>
-              <p>Price: {home.price ? `${home.price.toLocaleString()}` : "N/A"}</p>
-              <p>Residential Units: {home.residential_units ?? "N/A"} | Commercial Units: {home.commercial_units ?? "N/A"}</p>
-              <p>Gross Sqft: {home.gross_sqft?.toLocaleString() ?? "N/A"} | Land Sqft: {home.land_sqft?.toLocaleString() ?? "N/A"}</p>
-              <p>Year Built: {home.year_built ?? "N/A"}</p>
-              <p>Neighborhood: {home.neighborhood ?? "N/A"} | Zip: {home.zip_code ?? "N/A"}</p>
-              <p>Sale Date: {home.sale_date ? new Date(home.sale_date).toLocaleDateString() : "N/A"}</p>
-            </div>
-          ))}
+          <h1 className="homes-count"> Home Listings </h1>
+          <div className="homes-container">
+            {homes.map(home => (
+              <div key={home.id} className="home-card">
+                <h3>{home.address}</h3>
+                <p>{home.building_class}</p>
+                <p>Price: {home.price ? `$${home.price.toLocaleString()}` : "N/A"}</p>
+                <p>Residential Units: {home.residential_units ?? "N/A"} | Commercial Units: {home.commercial_units ?? "N/A"}</p>
+                <p>Gross Sqft: {home.gross_sqft?.toLocaleString() ?? "N/A"} | Land Sqft: {home.land_sqft?.toLocaleString() ?? "N/A"}</p>
+                <p>Year Built: {home.year_built ?? "N/A"}</p>
+                <p>Neighborhood: {home.neighborhood ?? "N/A"} | Zip: {home.zip_code ?? "N/A"}</p>
+                <p>Sale Date: {home.sale_date ? new Date(home.sale_date).toLocaleDateString() : "N/A"}</p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

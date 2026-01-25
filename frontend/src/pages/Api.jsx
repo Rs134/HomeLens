@@ -1,4 +1,5 @@
 import Listings from "../components/Listings"
+import "/Users/reiadsakoor/DevSpace/HomeLens/frontend/src/api.css"
 
 function Api() {
   return (
@@ -10,4 +11,4 @@ function Api() {
   )
 }
 
-export default Api
+export default Api;
