@@ -54,11 +54,16 @@ function Listings() {
 
   return (
     <div>
+
       {homes.length === 0 ? (
         <p>No homes found.</p>
       ) : (
         <div>
           <h1 className="homes-count"> Home Listings </h1>
+          <div className="button-group"> 
+            <button className="filter-button btn"> Filter </button>
+            <button className="search-button btn "> Search </button>
+          </div> 
           <div className="homes-container">
             {homes.map(home => (
               <div key={home.id} className="home-card">
@@ -68,7 +73,7 @@ function Listings() {
                 <p>Residential Units: {home.residential_units ?? "N/A"} | Commercial Units: {home.commercial_units ?? "N/A"}</p>
                 <p>Gross Sqft: {home.gross_sqft?.toLocaleString() ?? "N/A"} | Land Sqft: {home.land_sqft?.toLocaleString() ?? "N/A"}</p>
                 <p>Year Built: {home.year_built ?? "N/A"}</p>
-                <p>Neighborhood: {home.neighborhood ?? "N/A"} | Zip: {home.zip_code ?? "N/A"}</p>
+                <p>Neighborhood: {home.neighborhood ?? "N/A"} | Zip Code: {home.zip_code ?? "N/A"}</p>
                 <p>Sale Date: {home.sale_date ? new Date(home.sale_date).toLocaleDateString() : "N/A"}</p>
               </div>
             ))}
