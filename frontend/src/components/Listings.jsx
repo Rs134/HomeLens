@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
+import AIInput from "./AIInput";
 
 function Listings() {
   const [homes, setHomes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [aiResponse, setAiResponse] = useState(null);
+  const [aiLoading, setAiLoading] = useState(false);
 
   useEffect(() => {
     const fetchHomes = async () => {
@@ -15,13 +18,7 @@ function Listings() {
         if (!response.ok) throw new Error("Failed to fetch housing data");
 
         const data = await response.json();
-        
-        // Debug: log to see ALL available fields
-        console.log("Raw data:", data);
-        console.log("First item keys:", Object.keys(data[0]));
-        console.log("First item:", data[0]);
 
-        // Map with correct field names from the API
         const normalizedHomes = data.map((home, index) => ({
           id: home.bbl || `${home.block}-${home.lot}` || `home-${index}`,
           address: home.address || '',
@@ -49,15 +46,103 @@ function Listings() {
     fetchHomes();
   }, []);
 
+  const handleAISearch = async (userQuery) => {
+    setAiLoading(true);
+    setAiResponse(null);
+    
+    try {
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${import.meta.env.VITE_GEMINI_API_KEY}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            contents: [{
+              parts: [{
+                text: `You are a helpful real estate assistant. Extract filters from user queries and return valid JSON only.
+                
+Given this user query: "${userQuery}"
+
+Extract the following filters and return ONLY valid JSON with no markdown or explanation:
+{
+  "residential_units_min": number or null,
+  "residential_units_max": number or null,
+  "price_min": number or null,
+  "price_max": number or null,
+  "neighborhood": string or null,
+  "year_built_min": number or null,
+  "explanation": "A friendly explanation of what you're searching for"
+}`
+              }]
+            }],
+            generationConfig: {
+              temperature: 0.7,
+              maxOutputTokens: 500
+            }
+          })
+        }
+      );
+
+      const data = await response.json();
+      const aiText = data.candidates[0].content.parts[0].text;
+      
+      const cleanedText = aiText.replace(/```json\n?|\n?```/g, '').trim();
+      
+      const filters = JSON.parse(cleanedText);
+      
+      const filteredHomes = homes.filter(home => {
+        if (filters.residential_units_min && home.residential_units < filters.residential_units_min) return false;
+        if (filters.residential_units_max && home.residential_units > filters.residential_units_max) return false;
+        if (filters.price_min && home.price < filters.price_min) return false;
+        if (filters.price_max && home.price > filters.price_max) return false;
+        if (filters.neighborhood && !home.neighborhood?.toLowerCase().includes(filters.neighborhood.toLowerCase())) return false;
+        if (filters.year_built_min && home.year_built < filters.year_built_min) return false;
+        
+        return true;
+      });
+      
+      setAiResponse({
+        explanation: filters.explanation,
+        results: filteredHomes
+      });
+      
+    } catch (error) {
+      console.error('AI Error:', error);
+      setError('Failed to process AI search. Please check your API key.');
+    } finally {
+      setAiLoading(false);
+    }
+  };
+
   if (loading) return <p>Loading homes...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
     <div>
+      <AIInput onSearch={handleAISearch} loading={aiLoading} />
 
-      {homes.length === 0 ? (
-        <p>No homes found.</p>
-      ) : (
+      {aiResponse && (
+        <div className="ai-response">
+          <div className="homes-container">
+            {aiResponse.results.map(home => (
+              <div key={home.id} className="home-card">
+                <h3>{home.address}</h3>
+                <p>{home.building_class}</p>
+                <p>Price: {home.price ? `$${home.price.toLocaleString()}` : "N/A"}</p>
+                <p>Residential Units: {home.residential_units ?? "N/A"} | Commercial Units: {home.commercial_units ?? "N/A"}</p>
+                <p>Gross Sqft: {home.gross_sqft?.toLocaleString() ?? "N/A"} | Land Sqft: {home.land_sqft?.toLocaleString() ?? "N/A"}</p>
+                <p>Year Built: {home.year_built ?? "N/A"}</p>
+                <p>Neighborhood: {home.neighborhood ?? "N/A"} | Zip: {home.zip_code ?? "N/A"}</p>
+                <p>Sale Date: {home.sale_date ? new Date(home.sale_date).toLocaleDateString() : "N/A"}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {!aiResponse && (
         <div>
           <div className="homes-container">
             {homes.map(home => (
@@ -68,7 +153,7 @@ function Listings() {
                 <p>Residential Units: {home.residential_units ?? "N/A"} | Commercial Units: {home.commercial_units ?? "N/A"}</p>
                 <p>Gross Sqft: {home.gross_sqft?.toLocaleString() ?? "N/A"} | Land Sqft: {home.land_sqft?.toLocaleString() ?? "N/A"}</p>
                 <p>Year Built: {home.year_built ?? "N/A"}</p>
-                <p>Neighborhood: {home.neighborhood ?? "N/A"} | Zip Code: {home.zip_code ?? "N/A"}</p>
+                <p>Neighborhood: {home.neighborhood ?? "N/A"} | Zip: {home.zip_code ?? "N/A"}</p>
                 <p>Sale Date: {home.sale_date ? new Date(home.sale_date).toLocaleDateString() : "N/A"}</p>
               </div>
             ))}

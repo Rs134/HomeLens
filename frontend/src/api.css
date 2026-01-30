@@ -56,3 +56,45 @@ body {
     justify-content: flex-start;
     gap: 25px 
 }
+
+.input-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-direction: column;
+}
+
+textarea {
+    width: 80%;
+    font-size: 20px;
+    font-family: inherit;
+    color: #e0e0e0;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(184, 147, 95, 0.25);
+    border-radius: 20px;
+    padding: 15px;
+    margin: 20px auto;
+    max-height: 300px;
+    overflow-y: auto;
+    resize: none;
+    scrollbar-width: none;        
+    -ms-overflow-style: none; 
+
+    transition: 
+        border 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+textarea:focus, textarea:hover {
+    outline: none;
+    border: 1px solid #d4af6a;
+    box-shadow: 0 0 15px rgba(158, 130, 79, 0.35);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+textarea::placeholder {
+    color: rgba(224, 224, 224, 0.5);
+}
