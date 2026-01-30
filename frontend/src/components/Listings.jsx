@@ -59,11 +59,6 @@ function Listings() {
         <p>No homes found.</p>
       ) : (
         <div>
-          <h1 className="homes-count"> Home Listings </h1>
-          <div className="button-group"> 
-            <button className="filter-button btn"> Filter </button>
-            <button className="search-button btn "> Search </button>
-          </div> 
           <div className="homes-container">
             {homes.map(home => (
               <div key={home.id} className="home-card">

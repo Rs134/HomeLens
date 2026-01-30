@@ -4,7 +4,8 @@ import "/Users/reiadsakoor/DevSpace/HomeLens/frontend/src/api.css"
 function Api() {
   return (
     <div>
-        <Listings/>
+      <h1 className="homes-count"> Home Listings </h1>
+      <Listings/>
 
 
     </div>
