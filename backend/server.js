@@ -10,7 +10,6 @@ const PORT = process.env.PORT || 3001;
 // CORS configuration - Add your deployed frontend URL here
 const allowedOrigins = [
   'http://localhost:5173',
-  'http://localhost:5174',
   'https://homelens-ab3o.onrender.com'
 ];
 
