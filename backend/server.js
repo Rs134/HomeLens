@@ -44,7 +44,6 @@ app.post('/api/ai-search', async (req, res) => {
       return res.status(400).json({ error: 'Homes data is required' });
     }
 
-    // Check if API key exists
     if (!process.env.GEMINI_API_KEY) {
       console.error('GEMINI_API_KEY is not set');
       return res.status(500).json({ error: 'API key not configured' });

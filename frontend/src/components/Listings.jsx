@@ -55,7 +55,7 @@ function Listings() {
       // Determine API URL based on environment
       const API_URL = import.meta.env.MODE === 'development'
         ? 'http://localhost:3001/api/ai-search'
-        : 'https://homelens-backend.onrender.com/api/ai-search';
+        : 'https://homelens-backend.onrender.com';
 
       const response = await fetch(API_URL, {
         method: 'POST',
