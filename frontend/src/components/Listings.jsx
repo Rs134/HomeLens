@@ -52,10 +52,12 @@ function Listings() {
     setError(null);
     
     try {
-      const API_URL = import.meta.env.MODE === 'development'
+      const isLocalhost = window.location.hostname === 'localhost';
+      
+      const API_URL = isLocalhost
         ? 'http://localhost:3001/api/ai-search'
         : 'https://homelens-backend.onrender.com/api/ai-search';
-
+  
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
@@ -66,12 +68,12 @@ function Listings() {
           homes: homes
         })
       });
-
+  
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
         throw new Error(errorData.error || 'Failed to process AI search');
       }
-
+  
       const data = await response.json();
       
       setAiResponse({
