@@ -13,47 +13,36 @@ const allowedOrigins = [
   'https://homelens-ab3o.onrender.com'
 ];
 
-// Log all incoming requests
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.path} - Origin: ${req.get('origin')}`);
-  next();
-});
-
-app.use(cors({
+const corsOptions = {
   origin: function (origin, callback) {
-    console.log('Request from origin:', origin);
     if (!origin) return callback(null, true);
     
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      console.log('CORS blocked:', origin);
       callback(new Error('Not allowed by CORS'));
     }
   },
   credentials: true,
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
-}));
+};
 
-app.options('*', cors());
+app.use(cors(corsOptions));
+
+// Remove the problematic app.options('*', cors()); line
 
 app.use(express.json());
 
 app.post('/api/ai-search', async (req, res) => {
-  console.log('Received AI search request');
-  console.log('Body:', JSON.stringify(req.body).substring(0, 200));
-  
   try {
     const { userQuery, homes } = req.body;
 
     if (!userQuery) {
-      console.log('Error: No user query');
       return res.status(400).json({ error: 'User query is required' });
     }
 
     if (!homes || !Array.isArray(homes)) {
-      console.log('Error: Invalid homes data');
       return res.status(400).json({ error: 'Homes data is required' });
     }
 
@@ -61,8 +50,6 @@ app.post('/api/ai-search', async (req, res) => {
       console.error('GEMINI_API_KEY is not set');
       return res.status(500).json({ error: 'API key not configured' });
     }
-
-    console.log(`Processing query: "${userQuery}" with ${homes.length} homes`);
 
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
@@ -98,19 +85,15 @@ Extract the following filters and return ONLY valid JSON with no markdown or exp
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('Gemini API error:', response.status, errorText);
+      console.error('Gemini API error:', errorText);
       throw new Error(`Failed to fetch from Gemini API: ${response.status}`);
     }
 
     const data = await response.json();
-    console.log('Gemini response received');
-    
     const aiText = data.candidates[0].content.parts[0].text;
     
     const cleanedText = aiText.replace(/```json\n?|\n?```/g, '').trim();
     const filters = JSON.parse(cleanedText);
-    
-    console.log('Filters extracted:', filters);
     
     const filteredHomes = homes.filter(home => {
       if (filters.residential_units_min && home.residential_units < filters.residential_units_min) return false;
@@ -122,8 +105,6 @@ Extract the following filters and return ONLY valid JSON with no markdown or exp
       
       return true;
     });
-    
-    console.log(`Filtered to ${filteredHomes.length} homes`);
     
     res.json({
       explanation: filters.explanation,
@@ -144,19 +125,11 @@ app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'ok', 
     message: 'Server is running',
-    geminiConfigured: !!process.env.GEMINI_API_KEY,
-    allowedOrigins: allowedOrigins
+    geminiConfigured: !!process.env.GEMINI_API_KEY 
   });
-});
-
-// Catch-all for undefined routes
-app.use((req, res) => {
-  console.log('404 - Route not found:', req.path);
-  res.status(404).json({ error: 'Route not found' });
 });
 
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
   console.log(`Gemini API configured: ${process.env.GEMINI_API_KEY ? 'Yes' : 'No'}`);
-  console.log(`Allowed origins:`, allowedOrigins);
 });
