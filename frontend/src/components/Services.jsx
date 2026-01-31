@@ -5,8 +5,8 @@ function Services (){
                 <div className="services-headline">
                     <p className="services-note"> We Appreciate Your Trust Greatly </p>
                     <h1 className="services-title"> Transform Your Perspective Now </h1>
-                    <p className="services-content"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis animi ex adipisci nisi beatae ipsum quisquam quos repudiandae accusamus quis. Distinctio expedita reprehenderit consectetur debitis cum unde nesciunt sunt magni.</p>
-                    <Link to="/api"> <button className="services-button"> Explore Now </button> </Link>
+                    <p className="services-content"> Take the next step toward clarity and confidence. This is your chance to explore housing data through a smarter lens—one that adapts to your needs, highlights meaningful patterns, and helps you better understand what’s possible. When you’re ready, let the AI guide you forward and reshape the way you discover homes.</p>
+                    <Link to="/api"> <button className="services-button"> Try Now </button> </Link>
                 </div>
                 <div className="services-image">
                     <img src="/services-img.jpg"/>

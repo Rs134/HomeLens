@@ -22,7 +22,7 @@ function AIInput({ onSearch, loading }) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyPress={handleKeyPress}
-          placeholder="Ask me anything... e.g., 'Show me 3-4 bedroom homes under $900k'"
+          placeholder="Ask me anything... e.g., 'Show me home listings under $900k'"
           disabled={loading}
         />
         <button className="btn" onClick={handleSubmit} disabled={loading}>

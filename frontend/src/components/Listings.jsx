@@ -49,68 +49,35 @@ function Listings() {
   const handleAISearch = async (userQuery) => {
     setAiLoading(true);
     setAiResponse(null);
+    setError(null);
     
     try {
-      const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${import.meta.env.VITE_GEMINI_API_KEY}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            contents: [{
-              parts: [{
-                text: `You are a helpful real estate assistant. Extract filters from user queries and return valid JSON only.
-                
-Given this user query: "${userQuery}"
+      // Call backend API instead of Gemini directly
+      const response = await fetch('http://localhost:3001/api/ai-search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          userQuery: userQuery,
+          homes: homes
+        })
+      });
 
-Extract the following filters and return ONLY valid JSON with no markdown or explanation:
-{
-  "residential_units_min": number or null,
-  "residential_units_max": number or null,
-  "price_min": number or null,
-  "price_max": number or null,
-  "neighborhood": string or null,
-  "year_built_min": number or null,
-  "explanation": "A friendly explanation of what you're searching for"
-}`
-              }]
-            }],
-            generationConfig: {
-              temperature: 0.7,
-              maxOutputTokens: 500
-            }
-          })
-        }
-      );
+      if (!response.ok) {
+        throw new Error('Failed to process AI search');
+      }
 
       const data = await response.json();
-      const aiText = data.candidates[0].content.parts[0].text;
-      
-      const cleanedText = aiText.replace(/```json\n?|\n?```/g, '').trim();
-      
-      const filters = JSON.parse(cleanedText);
-      
-      const filteredHomes = homes.filter(home => {
-        if (filters.residential_units_min && home.residential_units < filters.residential_units_min) return false;
-        if (filters.residential_units_max && home.residential_units > filters.residential_units_max) return false;
-        if (filters.price_min && home.price < filters.price_min) return false;
-        if (filters.price_max && home.price > filters.price_max) return false;
-        if (filters.neighborhood && !home.neighborhood?.toLowerCase().includes(filters.neighborhood.toLowerCase())) return false;
-        if (filters.year_built_min && home.year_built < filters.year_built_min) return false;
-        
-        return true;
-      });
       
       setAiResponse({
-        explanation: filters.explanation,
-        results: filteredHomes
+        explanation: data.explanation,
+        results: data.results
       });
       
     } catch (error) {
       console.error('AI Error:', error);
-      setError('Failed to process AI search. Please check your API key.');
+      setError('Failed to process AI search. Please try again.');
     } finally {
       setAiLoading(false);
     }

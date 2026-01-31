@@ -1,3 +1,4 @@
+
 function Home(){
     return (
         <section id="home">
@@ -12,7 +13,7 @@ function Home(){
                 </h2>
             </div>
             <div className="home-btn">
-                <button className="btn"> Explore </button>
+                <a href="#about"> <button className="btn"> Explore </button> </a>
             </div>
         </section>
     )

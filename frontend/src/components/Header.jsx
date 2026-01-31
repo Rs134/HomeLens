@@ -19,7 +19,7 @@ function Header() {
                 </nav>
 
                 <div className="header-actions">
-                    <button className="btn">Get Started</button>
+                    <a href="#services"> <button className="btn">Get Started</button> </a>
                 </div>
             </div>
             <Outlet/>

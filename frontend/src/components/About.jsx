@@ -7,7 +7,7 @@ function About(){
                         <h2> Discover What We Can Build Together</h2>
                     </div>
                     <div className="about-right-heading">
-                        <h3> Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem voluptatibus voluptatum obcaecati nesciunt minima reprehenderit aperiam repudiandae vel placeat a non omnis nulla ullam in, error voluptate corrupti optio ipsum!</h3>
+                        <h3> Explore what’s possible with an AI-driven discovery experience designed to adapt to your needs. Our platform helps you interact with real housing data in a simple, intuitive way—making it easier to explore options, spot patterns, and gain clarity on what’s out there.</h3>
                     </div>
                 </div>
                 <div className="cards-container">
@@ -16,11 +16,11 @@ function About(){
                             <img src="/star.png"/>
                         </div>
                         <div className="card-heading">
-                            <h3> AI Driven Filtering </h3>
+                            <h3> Smart Personalization </h3>
 
                         </div>
                         <div className="card-content">
-                            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque quas amet voluptatum cupiditate sed aliquam magni laboriosam necessitatibus esse? Tempore tempora deserunt expedita consequuntur nam asperiores. Officiis eligendi possimus deleniti.</p>
+                            <p> Our AI filtering adapts to what matters most to you. Instead of rigid checkboxes, it understands intent—analyzing preferences, priorities, and patterns in housing data to surface options that best align with your goals. This creates a more thoughtful, personalized discovery experience that feels tailored, not generic.</p>
 
                         </div>
 
@@ -31,11 +31,11 @@ function About(){
                         <img src="/user.png"/>
                         </div>
                         <div className="card-heading">
-                            <h3> AI Driven Filtering </h3>
+                            <h3> Community Impact </h3>
 
                         </div>
                         <div className="card-content">
-                            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque quas amet voluptatum cupiditate sed aliquam magni laboriosam necessitatibus esse? Tempore tempora deserunt expedita consequuntur nam asperiores. Officiis eligendi possimus deleniti.</p>
+                            <p> Homes don’t exist in isolation, and neither should your search. Our AI considers neighborhood-level trends and shared characteristics to help you explore areas that align with your lifestyle. By revealing patterns across communities, it helps you understand how different environments may fit the way you want to live.</p>
 
                         </div>
 
@@ -47,11 +47,11 @@ function About(){
 
                         </div>
                         <div className="card-heading">
-                            <h3> AI Driven Filtering </h3>
+                            <h3> Guided Refinement </h3>
 
                         </div>
                         <div className="card-content">
-                            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque quas amet voluptatum cupiditate sed aliquam magni laboriosam necessitatibus esse? Tempore tempora deserunt expedita consequuntur nam asperiores. Officiis eligendi possimus deleniti.</p>
+                            <p> Your vision evolves as you explore, and the AI evolves with you. Through interactive input and continuous refinement, the system helps you clarify what you’re really looking for—adjusting results as your preferences change. It’s a guided process that turns exploration into confident decision-making.</p>
 
                         </div>
 
