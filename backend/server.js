@@ -7,7 +7,31 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+// CORS configuration - Add your deployed frontend URL here
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://homelens-ab3o.onrender.com/' 
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+// Handle preflight requests
+app.options('*', cors());
+
 app.use(express.json());
 
 app.post('/api/ai-search', async (req, res) => {
@@ -20,6 +44,12 @@ app.post('/api/ai-search', async (req, res) => {
 
     if (!homes || !Array.isArray(homes)) {
       return res.status(400).json({ error: 'Homes data is required' });
+    }
+
+    // Check if API key exists
+    if (!process.env.GEMINI_API_KEY) {
+      console.error('GEMINI_API_KEY is not set');
+      return res.status(500).json({ error: 'API key not configured' });
     }
 
     const response = await fetch(
@@ -56,7 +86,9 @@ app.post('/api/ai-search', async (req, res) => {
     );
 
     if (!response.ok) {
-      throw new Error('Failed to fetch from Gemini API');
+      const errorText = await response.text();
+      console.error('Gemini API error:', errorText);
+      throw new Error(`Failed to fetch from Gemini API: ${response.status}`);
     }
 
     const data = await response.json();
@@ -93,9 +125,14 @@ app.post('/api/ai-search', async (req, res) => {
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: 'Server is running' });
+  res.json({ 
+    status: 'ok', 
+    message: 'Server is running',
+    geminiConfigured: !!process.env.GEMINI_API_KEY 
+  });
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
+  console.log(`Gemini API configured: ${process.env.GEMINI_API_KEY ? 'Yes' : 'No'}`);
 });

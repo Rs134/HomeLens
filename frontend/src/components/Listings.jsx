@@ -53,7 +53,7 @@ function Listings() {
     
     try {
       // Call backend API instead of Gemini directly
-      const response = await fetch('http://localhost:3001/api/ai-search', {
+      const response = await fetch('http://localhost:3001/api/ai-search', 'https://homelens-backend.onrender.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
