@@ -52,8 +52,12 @@ function Listings() {
     setError(null);
     
     try {
-      // Call backend API instead of Gemini directly
-      const response = await fetch('http://localhost:3001/api/ai-search', 'https://homelens-backend.onrender.com', {
+      // Determine API URL based on environment
+      const API_URL = import.meta.env.MODE === 'development'
+        ? 'http://localhost:3001/api/ai-search'
+        : 'https://homelens-backend.onrender.com/api/ai-search';
+
+      const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -65,7 +69,8 @@ function Listings() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to process AI search');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to process AI search');
       }
 
       const data = await response.json();
@@ -77,7 +82,7 @@ function Listings() {
       
     } catch (error) {
       console.error('AI Error:', error);
-      setError('Failed to process AI search. Please try again.');
+      setError(error.message || 'Failed to process AI search. Please try again.');
     } finally {
       setAiLoading(false);
     }

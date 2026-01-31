@@ -10,12 +10,12 @@ const PORT = process.env.PORT || 3001;
 // CORS configuration - Add your deployed frontend URL here
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://homelens-ab3o.onrender.com/' 
+  'http://localhost:5174',
+  'https://homelens-ab3o.onrender.com'
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
     
     if (allowedOrigins.includes(origin)) {
@@ -29,7 +29,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Handle preflight requests
 app.options('*', cors());
 
 app.use(express.json());
@@ -123,7 +122,6 @@ app.post('/api/ai-search', async (req, res) => {
   }
 });
 
-// Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'ok', 
