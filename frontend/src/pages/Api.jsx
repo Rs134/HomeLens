@@ -1,5 +1,5 @@
 import Listings from "../components/Listings"
-import "/Users/reiadsakoor/DevSpace/HomeLens/frontend/src/api.css"
+import "../api.css"
 
 function Api() {
   return (
