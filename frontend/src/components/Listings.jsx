@@ -56,7 +56,7 @@ function Listings() {
       
       const API_URL = isLocalhost
         ? 'http://localhost:3001/api/ai-search'
-        : 'https://homelens-backend.onrender.com/api/ai-search';
+        : 'https://homelens-backend.onrender.com/api';
   
       const response = await fetch(API_URL, {
         method: 'POST',
