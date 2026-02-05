@@ -422,6 +422,11 @@ body{
     .card {
         padding: 2rem 1.5rem;
     }
+
+    .services-image img{
+        width: 400px;
+    }
+
 }
 
 /* Responsive Design */
@@ -433,34 +438,53 @@ body{
 
 @media (max-width: 840px) {
     .header-container {
-        flex-wrap: wrap;
+        flex-direction: column;
         padding: 1rem 1.5rem;
+        gap: 20px;
     }
-
-    .nav {
-        width: 100%;
+    .header-container {
+        flex-direction: column;
+        padding: 1rem 1.5rem;
+        gap: 20px;
+    }
+    #home{
+        margin-top: 100px;
+        display: flex;
+        align-items: center;
         justify-content: center;
-        gap: 1.5rem;
-        padding-top: 1rem;
+        text-align: center;
     }
 
-    .logo-tagline {
-        display: none;
+    .home-caption{
+        width: 100%;
     }
+
+    .home-headline{
+        width: 100%;
+    }
+
 }
 
 @media (max-width: 600px) {
-    .nav {
+
+    .header-container {
         flex-direction: column;
-        gap: 0.8rem;
+        padding: 1rem 1.5rem;
+        gap: 20px;
+    }
+    #home{
+        margin-top: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
 
-    .logo-text {
-        font-size: 1.3rem;
+    .home-caption{
+        width: 100%;
     }
 
-    .cta-button {
-        padding: 0.7rem 1.4rem;
-        font-size: 0.85rem;
+    .home-headline{
+        width: 100%;
     }
 }
