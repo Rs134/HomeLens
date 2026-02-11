@@ -156,3 +156,27 @@ textarea::placeholder {
 .banner-close:hover {
   background: rgba(255, 255, 255, 0.3);
 }
+
+@media (max-width: 750px) {
+    .homes-container {
+      grid-template-columns: repeat(2, 1fr);    
+    }
+
+    .input-container textarea {
+        width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+  .homes-container {
+    grid-template-columns: repeat(1, 1fr);    
+  }
+
+  .input-container textarea {
+      width: 100%;
+  }
+
+  .home-card{
+    text-align: center;
+  }
+}

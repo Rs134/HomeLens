@@ -129,10 +129,9 @@ body{
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.55); /* darkness */
+    background: rgba(0, 0, 0, 0.55); 
   }
   
-  /* Make sure text stays above overlay */
   #home > * {
     position: relative;
     z-index: 1;
@@ -486,5 +485,39 @@ body{
 
     .home-headline{
         width: 100%;
+    }
+}
+
+@media (max-width: 550px) {
+    .services-image img{
+        width: 100%;
+    }
+
+    .home-headline{
+        font-size: 1.7rem;
+    }
+
+    .home-caption{
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 450px) {
+    .services-image img{
+        width: 100%;
+        height: 200px;
+    }
+
+    .home-headline{
+        font-size: 1.3rem;
+    }
+
+    .home-caption{
+        font-size: 0.85rem;
+    }
+
+    .about-headline{
+        flex-direction: column;
+        text-align: center;
     }
 }
